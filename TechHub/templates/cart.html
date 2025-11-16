@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cart — TechZone</title>
+  <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner" style="max-width:1100px; margin:auto;">
+      <a class="brand" href="{% url 'home' %}" style="text-decoration:none; color:inherit; display:flex; align-items:center; gap:10px;">
+        <img src="{% static 'images/laptop.png' %}" alt="TechZone" class="brand-logo" style="width:36px">
+        <span style="font-weight:700; font-size:1.1rem">TechZone</span>
+      </a>
+      <nav class="mini-nav" style="display:flex; gap:14px; align-items:center;">
+        <a href="/all/">All Products</a>
+        <a href="/cart/" class="cart-link">Cart <span id="cartCount" class="badge">0</span></a>
+        <a href="/login/"><i class="fa-solid fa-user"></i></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="cart-page">
+    <section class="cart-hero" style="max-width:1100px; margin:auto;">
+      <div class="hero-inner">
+        <h1>Your Cart</h1>
+        <p class="muted">Review your items and proceed to checkout.</p>
+      </div>
+    </section>
+
+    <section class="cart-body container" style="max-width:1100px; margin:auto;">
+      <div class="cart-grid" style="display:grid; grid-template-columns: 1fr 320px; gap:18px;">
+        <div class="cart-items-panel card" id="cartItemsContainer" style="min-height:220px;">
+          <div id="cartItems">Loading cart...</div>
+        </div>
+
+       <aside class="order-summary-panel card" aria-labelledby="summaryHeading">
+  <h2 id="summaryHeading">Order Summary</h2>
+
+  <div class="summary-line">
+    <span>Subtotal</span>
+    <span id="subtotal">₹0</span>
+  </div>
+
+  <div class="summary-line">
+    <span>Shipping</span>
+    <span id="shipping">FREE</span>
+  </div>
+
+  <div class="summary-line">
+    <span>Tax (18%)</span>
+    <span id="tax">₹0</span>
+  </div>
+
+  <div class="summary-total">
+    <strong>Total</strong>
+    <strong id="total">₹0</strong>
+  </div>
+
+
+  <!-- Checkout button is here in the order-summary (right side) -->
+  <button id="btnCheckout" class="btn primary full">Proceed to Checkout</button>
+
+  <a class="link muted center" href="/all/" style="display:block; margin-top:12px; text-align:center;">
+    Continue shopping
+  </a>
+</aside>
+      </div>
+    </section>
+  </main>
+
+  <footer style="text-align:center; padding:20px 0; color:#666">
+    © TechZone
+  </footer>
+
+  <script src="{% static 'Javascript/auth.js' %}"></script>
+  <script src="{% static 'Javascript/products.js' %}"></script>
+  <script src="{% static 'Javascript/cart.js' %}"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      updateCartCount('cartCount');
+      renderCartItems('cartItems');
+
+      // Ensure checkout button is wired
+      document.getElementById('btnCheckout')?.addEventListener('click', async () => {
+        await checkout();
+        await renderCartItems('cartItems');
+        await updateCartCount('cartCount');
+      });
+    });
+  </script>
+</body>
+</html>

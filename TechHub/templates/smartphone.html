@@ -1,0 +1,166 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smartphones</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/smartphone.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-section">
+                <img src="{% static 'images/laptop.png' %}" alt=""> 
+                <a href="{% url 'index' %}" style="color: black;text-decoration: none;"><h3>TechZone</h3></a>
+            </div>
+            
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <span class="search-icon" id="searchIcon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <input type="text" id="searchBox" placeholder="Search smartphones...">
+                </div>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="{% url 'All' %}">All Products</a>
+                <a href="{% url 'Smartphone' %}">Smartphones</a>
+                <a href="{% url 'laptop' %}">Laptops</a>
+                <a href="{% url 'monitor' %}">Monitors</a>
+                <a href="{% url 'cpu' %}">CPUs</a>
+                <a href="{% url 'mouse' %}">Mouse</a>
+                <a href="{% url 'keyboard' %}">Keyboards</a>
+                <a href="{% url 'smartwatch' %}">Smart Watches</a>
+                <a href="{% url 'cart' %}"><i class="fa-solid fa-cart-shopping"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="products-container">
+        <div class="firstrow" id="productsGrid">
+            <div class="product-card" data-product="samsung galaxy a56 5g">
+                <div class="image-container">
+                    <img src="{% static 'images/mobile1.webp' %}" alt="">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">SAMSUNG Galaxy A56 5G</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.8 • <span class="stock">12 in stock</span>
+                    </div>
+                    <div class="price">₹41,999</div>
+                    <button class="add-btn" onclick="addToCart(1)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="product-card" data-product="nothing phone 3a">
+                <div class="image-container">
+                    <img src="{% static 'images/mobile2.webp' %}" alt="">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Nothing Phone 3a</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.5 • <span class="stock">26 in stock</span>
+                    </div>
+                    <div class="price">₹24,999</div>
+                    <button class="add-btn" onclick="addToCart(13)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="product-card" data-product="motorola edge 50 fusion">
+                <div class="image-container">
+                    <img src="{% static 'images/mobile3.webp' %}" alt="">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Motorola Edge 50 Fusion</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.4 • <span class="stock">30 in stock</span>
+                    </div>
+                    <div class="price">₹22,999</div>
+                   <button class="add-btn" onclick="addToCart(14)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="product-card" data-product="google pixel 8a">
+                <div class="image-container">
+                    <img src="{% static 'images/mobile4.webp' %}" alt="">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Google Pixel 8a</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.3 • <span class="stock">18 in stock</span>
+                    </div>
+                    <div class="price">₹37,999</div>
+                    <button class="add-btn" onclick="addToCart(4)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-product="apple iphone 15 black 128 gb">
+                <div class="image-container">
+                    <img src="{% static 'images/mobile5.webp' %}" alt="">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Apple iPhone 15 (Black, 128 GB)</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.6 • <span class="stock">10 in stock</span>
+                    </div>
+                    <div class="price">₹64,999</div>
+                    <button class="add-btn" onclick="addToCart(5)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-product="apple iphone 16 pro max 256 gb">
+                <div class="image-container">
+                    <img src="{% static 'images/mobile6.webp' %}" alt="">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Apple iPhone 16 Pro Max (256 GB)</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.6 • <span class="stock">4 in stock</span>
+                    </div>
+                    <div class="price">₹1,35,900</div>
+                    <button class="add-btn" onclick="addToCart(6)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-product="samsung galaxy s25 ultra 5g">
+                <div class="image-container">
+                    <img src="{% static 'images/mobile7.webp' %}" alt="">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">SAMSUNG Galaxy S25 Ultra 5G</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.8 • <span class="stock">8 in stock</span>
+                    </div>
+                    <div class="price">₹1,29,999</div>
+                    <button class="add-btn" onclick="addToCart(7)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-product="vivo x200 pro 5g">
+                <div class="image-container">
+                    <img src="{% static 'images/mobile8.webp' %}" alt="">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">vivo X200 Pro 5G</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.7 • <span class="stock">10 in stock</span>
+                    </div>
+                    <div class="price">₹94,999</div>
+                    <button class="add-btn" onclick="addToCart(8)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'Javascript/smartphone.js' %}"></script>
+    <script src="{% static 'Javascript/auth.js' %}"></script>
+<script src="{% static 'Javascript/products.js' %}"></script>
+<script src="{% static 'Javascript/cart.js' %}"></script>
+</body>
+</html>

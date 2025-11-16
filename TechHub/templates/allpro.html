@@ -1,0 +1,454 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>All Products - TechZone</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/allpro.css' %}">
+  <style>
+    /* small helper CSS in case your allpro.css is missing — minimal layout so page isn't blank */
+    .page-controls{display:flex;gap:12px;align-items:center;padding:18px 24px}
+    .search-input{flex:1;max-width:520px;padding:10px 14px;border-radius:999px;border:1px solid #e6e6e6}
+    .filters{display:flex;gap:8px;flex-wrap:wrap}
+    .filter-btn{background:#fff;border:1px solid #e6e6e6;padding:8px 12px;border-radius:8px;cursor:pointer}
+    .filter-btn.active{background:linear-gradient(90deg,#667eea,#764ba2);color:white;border-color:transparent}
+    .sort-select{padding:8px;border-radius:8px;border:1px solid #e6e6e6}
+    .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;padding:18px 24px}
+    .product-card{background:#fff;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.06);overflow:hidden;padding:14px;display:flex;flex-direction:column;gap:10px}
+    .image-container{height:170px;display:flex;align-items:center;justify-content:center;background:#fafafa;border-radius:8px;padding:10px}
+    .image-container img{max-width:100%;max-height:100%}
+    .product-title{font-weight:600;font-size:16px;color:#222}
+    .price{font-weight:700;color:#5b2fd2;font-size:18px}
+    .add-btn{margin-top:auto;background:linear-gradient(90deg,#667eea,#764ba2);border:none;color:#fff;padding:10px 12px;border-radius:10px;cursor:pointer}
+    .meta{color:#6b6b6b;font-size:13px}
+    .hidden{display:none!important}
+    @media (max-width:760px){.page-controls{flex-direction:column;align-items:stretch}.search-input{max-width:100%}}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-container" style="padding:14px 24px;display:flex;align-items:center;justify-content:space-between;background:#fff;">
+    <div style="display:flex;gap:12px;align-items:center">
+      <img src="{% static 'images/laptop.png' %}" alt="" style="height:34px">
+      <a href="{% url 'index' %}" style="text-decoration:none;color:#111;font-weight:700;font-size:20px">TechZone</a>
+    </div>
+
+    <nav style="display:flex;gap:16px;align-items:center">
+      <a href="{% url 'All' %}">All Products</a>
+      <a href="{% url 'Smartphone' %}">Smartphones</a>
+      <a href="{% url 'laptop' %}">Laptops</a>
+      <a href="{% url 'monitor' %}">Monitors</a>
+      <a href="{% url 'cpu' %}">CPUs</a>
+      <a href="{% url 'mouse' %}">Mouse</a>
+      <a href="{% url 'keyboard' %}">Keyboards</a>
+      <a href="{% url 'smartwatch' %}">Smart Watches</a>
+      <a href="{% url 'cart' %}"><i class="fa-solid fa-cart-shopping"></i></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="page-controls">
+    <input id="searchBox" class="search-input" placeholder="Search products by name or slug..." type="search">
+
+    <div class="filters" role="toolbar" aria-label="Category filters">
+      <button class="filter-btn active" data-cat="all">All</button>
+      <button class="filter-btn" data-cat="smartphone">Smartphones</button>
+      <button class="filter-btn" data-cat="laptop">Laptops</button>
+      <button class="filter-btn" data-cat="monitor">Monitors</button>
+      <button class="filter-btn" data-cat="cpu">CPUs</button>
+      <button class="filter-btn" data-cat="mouse">Mouse</button>
+      <button class="filter-btn" data-cat="keyboard">Keyboards</button>
+      <button class="filter-btn" data-cat="smartwatch">Smart Watches</button>
+    </div>
+
+    <select id="sortSelect" class="sort-select" title="Sort">
+      <option value="default">Sort: Default</option>
+      <option value="price-asc">Price: Low → High</option>
+      <option value="price-desc">Price: High → Low</option>
+      <option value="name-asc">Name: A → Z</option>
+    </select>
+  </div>
+
+  <section id="productsGrid" class="products-grid">
+    <!-- ========== Product cards (all categories) ==========
+         each card contains data attributes:
+          - data-name: searchable name
+          - data-slug: slug used by your addToCart
+          - data-price: numeric price (use plain number)
+          - data-category: one of smartphone|laptop|monitor|cpu|mouse|keyboard|smartwatch
+    -->
+
+    <!-- SMARTPHONES -->
+    <article class="product-card" data-name="SAMSUNG Galaxy A56 5G" data-slug="samsung-a56-5g" data-price="41999" data-category="smartphone">
+      <div class="image-container"><img src="{% static 'images/mobile1.webp' %}" alt=""></div>
+      <div class="product-title">SAMSUNG Galaxy A56 5G</div>
+      <div class="meta">★ 4.8 • <span class="stock">12 in stock</span></div>
+      <div class="price">₹41,999</div>
+      <button class="add-btn" onclick="addToCart(1)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="Nothing Phone 3a" data-slug="nothing-phone-3a" data-price="24999" data-category="smartphone">
+      <div class="image-container"><img src="{% static 'images/mobile2.webp' %}" alt=""></div>
+      <div class="product-title">Nothing Phone 3a</div>
+      <div class="meta">★ 4.5 • 26 in stock</div>
+      <div class="price">₹24,999</div>
+      <button class="add-btn" onclick="addToCart(13)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="Motorola Edge 50 Fusion" data-slug="motorola-edge-50" data-price="22999" data-category="smartphone">
+      <div class="image-container"><img src="{% static 'images/mobile3.webp' %}" alt=""></div>
+      <div class="product-title">Motorola Edge 50 Fusion</div>
+      <div class="meta">★ 4.4 • 30 in stock</div>
+      <div class="price">₹22,999</div>
+      <button class="add-btn" onclick="addToCart(14)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="Google Pixel 8a" data-slug="google-pixel-8a" data-price="37999" data-category="smartphone">
+      <div class="image-container"><img src="{% static 'images/mobile4.webp' %}" alt=""></div>
+      <div class="product-title">Google Pixel 8a</div>
+      <div class="meta">★ 4.3 • 18 in stock</div>
+      <div class="price">₹37,999</div>
+      <button class="add-btn" onclick="addToCart(4)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="Apple iPhone 15 (Black, 128 GB)" data-slug="iphone-15-black" data-price="64999" data-category="smartphone">
+      <div class="image-container"><img src="{% static 'images/mobile5.webp' %}" alt=""></div>
+      <div class="product-title">Apple iPhone 15 (Black, 128 GB)</div>
+      <div class="meta">★ 4.6 • 10 in stock</div>
+      <div class="price">₹64,999</div>
+      <button class="add-btn" onclick="addToCart(5)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="Apple iPhone 16 Pro Max (256 GB)" data-slug="iphone-16-pro-max" data-price="135900" data-category="smartphone">
+      <div class="image-container"><img src="{% static 'images/mobile6.webp' %}" alt=""></div>
+      <div class="product-title">Apple iPhone 16 Pro Max (256 GB)</div>
+      <div class="meta">★ 4.6 • 4 in stock</div>
+      <div class="price">₹1,35,900</div>
+      <button class="add-btn" onclick="addToCart(6)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="SAMSUNG Galaxy S25 Ultra 5G" data-slug="samsung-s25-ultra" data-price="129999" data-category="smartphone">
+      <div class="image-container"><img src="{% static 'images/mobile7.webp' %}" alt=""></div>
+      <div class="product-title">SAMSUNG Galaxy S25 Ultra 5G</div>
+      <div class="meta">★ 4.8 • 8 in stock</div>
+      <div class="price">₹1,29,999</div>
+      <button class="add-btn" onclick="addToCart(7)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="vivo X200 Pro 5G" data-slug="vivo-x200-pro" data-price="94999" data-category="smartphone">
+      <div class="image-container"><img src="{% static 'images/mobile8.webp' %}" alt=""></div>
+      <div class="product-title">vivo X200 Pro 5G</div>
+      <div class="meta">★ 4.7 • 10 in stock</div>
+      <div class="price">₹94,999</div>
+      <button class="add-btn" onclick="addToCart(8)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <!-- ================ LAPTOPS ================ -->
+    <article class="product-card" data-name="Acer Aspire 7" data-slug="acer-aspire-7" data-price="52990" data-category="laptop">
+      <div class="image-container"><img src="{% static 'images/laptop1.webp' %}" alt=""></div>
+      <div class="product-title">Acer Aspire 7</div>
+      <div class="meta">★ 4.3 • 4 in stock</div>
+      <div class="price">₹52,990</div>
+      <button class="add-btn" onclick="addToCart(9)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="HP Victus Intel Core i5 (12th Gen)" data-slug="hp-victus-i5" data-price="58990" data-category="laptop">
+      <div class="image-container"><img src="{% static 'images/laptop2.webp' %}" alt=""></div>
+      <div class="product-title">HP Victus Intel Core i5 12th Gen</div>
+      <div class="meta">★ 4.7 • 10 in stock</div>
+      <div class="price">₹58,990</div>
+      <button class="add-btn" onclick="addToCart(10)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="Apple MacBook AIR Apple M2" data-slug="macbook-air-m2" data-price="79990" data-category="laptop">
+      <div class="image-container"><img src="{% static 'images/laptop3.webp' %}" alt=""></div>
+      <div class="product-title">Apple MacBook AIR Apple M2</div>
+      <div class="meta">★ 4.7 • 6 in stock</div>
+      <div class="price">₹79,990</div>
+      <button class="add-btn" onclick="addToCart(11)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="SAMSUNG Galaxy Book5 Pro" data-slug="samsung-galaxy-book5" data-price="163990" data-category="laptop">
+      <div class="image-container"><img src="{% static 'images/laptop4.webp' %}" alt=""></div>
+      <div class="product-title">SAMSUNG Galaxy Book5 Pro</div>
+      <div class="meta">★ 4.7 • 2 in stock</div>
+      <div class="price">₹1,63,990</div>
+      <button class="add-btn" onclick="addToCart(12)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="Lenovo IdeaPad Slim 5" data-slug="lenovo-ideapad-slim5" data-price="79190" data-category="laptop">
+      <div class="image-container"><img src="{% static 'images/laptop5.webp' %}" alt=""></div>
+      <div class="product-title">Lenovo IdeaPad Slim 5</div>
+      <div class="meta">★ 4.2 • 7 in stock</div>
+      <div class="price">₹79,190</div>
+      <button class="add-btn" onclick="addToCart(15)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="ASUS Vivobook 15" data-slug="asus-vivobook-15" data-price="48990" data-category="laptop">
+      <div class="image-container"><img src="{% static 'images/laptop6.webp' %}" alt=""></div>
+      <div class="product-title">ASUS Vivobook 15</div>
+      <div class="meta">★ 4.2 • 6 in stock</div>
+      <div class="price">₹48,990</div>
+      <button class="add-btn" onclick="addToCart(16)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="Lenovo LOQ Intel Core i7 13th Gen" data-slug="lenovo-loq-i7" data-price="95190" data-category="laptop">
+      <div class="image-container"><img src="{% static 'images/laptop7.webp' %}" alt=""></div>
+      <div class="product-title">Lenovo LOQ Intel Core i7 13th Gen</div>
+      <div class="meta">★ 4.3 • 3 in stock</div>
+      <div class="price">₹95,190</div>
+      <button class="add-btn" onclick="addToCart(3)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="Lenovo Yoga 7" data-slug="lenovo-yoga-7" data-price="115390" data-category="laptop">
+      <div class="image-container"><img src="{% static 'images/laptop8.webp' %}" alt=""></div>
+      <div class="product-title">Lenovo Yoga 7</div>
+      <div class="meta">★ 4.5 • 3 in stock</div>
+      <div class="price">₹1,15,390</div>
+      <button class="add-btn" onclick="addToCart(17)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <!-- ================ MONITORS ================ -->
+    <article class="product-card" data-name="Lenovo (23.8 inch) Full HD Monitor" data-slug="lenovo-monitor" data-price="5990" data-category="monitor">
+      <div class="image-container"><img src="{% static 'images/monitor1.webp' %}" alt=""></div>
+      <div class="product-title">Lenovo (23.8 inch) Full HD Monitor</div>
+      <div class="meta">★ 4.3 • 7 in stock</div>
+      <div class="price">₹5,990</div>
+      <button class="add-btn" onclick="addToCart(2)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="SAMSUNG M5 (27 inch) Full HD" data-slug="samsung-m5-monitor" data-price="14799" data-category="monitor">
+      <div class="image-container"><img src="{% static 'images/monitor2.webp' %}" alt=""></div>
+      <div class="product-title">SAMSUNG M5 (27 inch) Full HD</div>
+      <div class="meta">★ 4.4 • 6 in stock</div>
+      <div class="price">₹14,799</div>
+      <button class="add-btn" onclick="addToCart(26)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="Lenovo L-Series (27 inch) Full HD" data-slug="lenovo-l-series-monitor" data-price="11249" data-category="monitor">
+      <div class="image-container"><img src="{% static 'images/monitor3.webp' %}" alt=""></div>
+      <div class="product-title">Lenovo L-Series (27 inch) Full HD</div>
+      <div class="meta">★ 4.1 • 3 in stock</div>
+      <div class="price">₹11,249</div>
+      <button class="add-btn" onclick="addToCart(27)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <!-- ================ MICE ================ -->
+    <article class="product-card" data-name="Neon Velocity Gaming Mouse" data-slug="neon-velocity-mouse" data-price="2999" data-category="mouse">
+      <div class="image-container"><img src="{% static 'images/mouse1.webp' %}" alt=""></div>
+      <div class="product-title">Neon Velocity Gaming Mouse</div>
+      <div class="meta">★ 4.6</div>
+      <div class="price">₹2,999</div>
+      <button class="add-btn" onclick="addToCart(22)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="CyberNova Gaming Mouse" data-slug="cybernova-mouse" data-price="4999" data-category="mouse">
+      <div class="image-container"><img src="{% static 'images/mouse2.webp' %}" alt=""></div>
+      <div class="product-title">CyberNova Gaming Mouse</div>
+      <div class="meta">★ 4.5</div>
+      <div class="price">₹4,999</div>
+      <button class="add-btn" onclick="addToCart(23)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="Chromatic Aura Wireless Mouse" data-slug="chromatic-aura-mouse" data-price="1999" data-category="mouse">
+      <div class="image-container"><img src="{% static 'images/mouse3.webp' %}" alt=""></div>
+      <div class="product-title">Chromatic Aura Wireless Mouse</div>
+      <div class="meta">★ 4.0</div>
+      <div class="price">₹1,999</div>
+      <button class="add-btn" onclick="addToCart(24)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="Luminous Grip Wireless Mouse" data-slug="luminous-grip-mouse" data-price="1599" data-category="mouse">
+      <div class="image-container"><img src="{% static 'images/mouse4.webp' %}" alt=""></div>
+      <div class="product-title">Luminous Grip Wireless Mouse</div>
+      <div class="meta">★ 4.8</div>
+      <div class="price">₹1,599</div>
+      <button class="add-btn" onclick="addToCart(25)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <!-- ================ KEYBOARDS ================ -->
+    <article class="product-card" data-name="Gaming keyboard" data-slug="gaming-keyboard" data-price="999" data-category="keyboard">
+      <div class="image-container"><img src="{% static 'images/kb1.webp' %}" alt=""></div>
+      <div class="product-title">Gaming keyboard</div>
+      <div class="meta">★ 4.6</div>
+      <div class="price">₹999</div>
+      <button class="add-btn" onclick="addToCart(32)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="Round Keycap Retro Keypad" data-slug="round-keycap-retro-keypad" data-price="2999" data-category="keyboard">
+      <div class="image-container"><img src="{% static 'images/kb2.webp' %}" alt=""></div>
+      <div class="product-title">Round Keycap Retro Keypad</div>
+      <div class="meta">★ 4.5</div>
+      <div class="price">₹2,999</div>
+      <button class="add-btn" onclick="addToCart(33)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="RGB Backlit Mechanical Keyboard" data-slug="rgb-backlit-mechanical-keyboard" data-price="3999" data-category="keyboard">
+      <div class="image-container"><img src="{% static 'images/kb3.webp' %}" alt=""></div>
+      <div class="product-title">RGB Backlit Mechanical Keyboard</div>
+      <div class="meta">★ 4.0</div>
+      <div class="price">₹3,999</div>
+      <button class="add-btn" onclick="addToCart(34)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="Mechanical Keyboard" data-slug="mechanical-keyboard" data-price="1599" data-category="keyboard">
+      <div class="image-container"><img src="{% static 'images/kb4.webp' %}" alt=""></div>
+      <div class="product-title">Mechanical Keyboard</div>
+      <div class="meta">★ 4.8</div>
+      <div class="price">₹1,599</div>
+      <button class="add-btn" onclick="addToCart(35)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <!-- ================ CPUS / CASES ================ -->
+    <article class="product-card" data-name="Corsair iCUE 4000X RGB" data-slug="corsair-icue-4000x-rgb" data-price="89999" data-category="cpu">
+      <div class="image-container"><img src="{% static 'images/cpu1.webp' %}" alt=""></div>
+      <div class="product-title">Corsair iCUE 4000X RGB</div>
+      <div class="meta">★ 4.6</div>
+      <div class="price">₹89,999</div>
+      <button class="add-btn" onclick="addToCart(28)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="AMD Ryzen 5 5000 processor" data-slug="amd-ryzen-5-5000-processor" data-price="34999" data-category="cpu">
+      <div class="image-container"><img src="{% static 'images/cpu2.webp' %}" alt=""></div>
+      <div class="product-title">AMD Ryzen 5 5000 processor</div>
+      <div class="meta">★ 4.5</div>
+      <div class="price">₹34,999</div>
+      <button class="add-btn" onclick="addToCart(29)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="Dark Nova CPU" data-slug="dark-nova-cpu" data-price="46999" data-category="cpu">
+      <div class="image-container"><img src="{% static 'images/cpu3.webp' %}" alt=""></div>
+      <div class="product-title">Dark Nova CPU</div>
+      <div class="meta">★ 4.0</div>
+      <div class="price">₹46,999</div>
+      <button class="add-btn" onclick="addToCart(30)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="HP Shadow Tech" data-slug="hp-shadow-tech" data-price="49599" data-category="cpu">
+      <div class="image-container"><img src="{% static 'images/cpu4.webp' %}" alt=""></div>
+      <div class="product-title">HP Shadow Tech</div>
+      <div class="meta">★ 4.8</div>
+      <div class="price">₹49,599</div>
+      <button class="add-btn" onclick="addToCart(31)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <!-- ================ SMARTWATCHES ================ -->
+    <article class="product-card" data-name="SAMSUNG Galaxy Watch 5 Pro" data-slug="samsung-watch-5-pro" data-price="8999" data-category="smartwatch">
+      <div class="image-container"><img src="{% static 'images/watch1.webp' %}" alt=""></div>
+      <div class="product-title">SAMSUNG Galaxy Watch 5 Pro</div>
+      <div class="meta">★ 4.6</div>
+      <div class="price">₹8,999</div>
+      <button class="add-btn" onclick="addToCart(18)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="Apple Watch Ultra" data-slug="apple-watch-ultra" data-price="20999" data-category="smartwatch">
+      <div class="image-container"><img src="{% static 'images/watch2.webp' %}" alt=""></div>
+      <div class="product-title">Apple Watch Ultra</div>
+      <div class="meta">★ 4.5</div>
+      <div class="price">₹20,999</div>
+      <button class="add-btn" onclick="addToCart(19)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="AMAZTIM GPS Smart Watch" data-slug="amaztim-gps-watch" data-price="9999" data-category="smartwatch">
+      <div class="image-container"><img src="{% static 'images/watch3.webp' %}" alt=""></div>
+      <div class="product-title">AMAZTIM GPS Smart Watch</div>
+      <div class="meta">★ 4.0</div>
+      <div class="price">₹9,999</div>
+      <button class="add-btn" onclick="addToCart(20)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <article class="product-card" data-name="Military Smart Watch" data-slug="military-smart-watch" data-price="1599" data-category="smartwatch">
+      <div class="image-container"><img src="{% static 'images/watch4.webp' %}" alt=""></div>
+      <div class="product-title">Military Smart Watch</div>
+      <div class="meta">★ 4.8</div>
+      <div class="price">₹1,599</div>
+      <button class="add-btn" onclick="addToCart(21)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+    </article>
+
+    <!-- if you have more products, duplicate the card pattern above and update data-* attrs -->
+  </section>
+</main>
+
+<!-- local JS (no modules) -->
+<script>
+(function(){
+  const grid = document.getElementById('productsGrid');
+  const cards = Array.from(grid.querySelectorAll('.product-card'));
+  const searchBox = document.getElementById('searchBox');
+  const sortSelect = document.getElementById('sortSelect');
+  const filterBtns = Array.from(document.querySelectorAll('.filter-btn'));
+
+  function normalize(s){ return String(s||'').toLowerCase().trim(); }
+
+  function renderFiltered(){
+    const q = normalize(searchBox.value);
+    const activeCat = document.querySelector('.filter-btn.active')?.dataset.cat || 'all';
+    // filter
+    let visible = cards.filter(card=>{
+      const name = normalize(card.dataset.name);
+      const slug = normalize(card.dataset.slug);
+      const price = card.dataset.price || '';
+      const category = normalize(card.dataset.category || '');
+      const matchesQuery = q === '' || name.includes(q) || slug.includes(q) || price.includes(q);
+      const matchesCat = (activeCat === 'all') || (category === activeCat);
+      return matchesQuery && matchesCat;
+    });
+
+    // sort
+    const sort = sortSelect.value;
+    if(sort === 'price-asc'){
+      visible.sort((a,b)=> (Number(a.dataset.price)||0) - (Number(b.dataset.price)||0));
+    } else if(sort === 'price-desc'){
+      visible.sort((a,b)=> (Number(b.dataset.price)||0) - (Number(a.dataset.price)||0));
+    } else if(sort === 'name-asc'){
+      visible.sort((a,b)=> a.dataset.name.localeCompare(b.dataset.name));
+    } // default: keep DOM order
+
+    // re-attach in order
+    grid.innerHTML = '';
+    if(visible.length === 0){
+      grid.innerHTML = '<div style="padding:40px;grid-column:1/-1;color:#555">No products found.</div>';
+      return;
+    }
+    visible.forEach(c => grid.appendChild(c));
+  }
+
+  // events
+  searchBox.addEventListener('input', ()=> renderFiltered());
+  sortSelect.addEventListener('change', ()=> renderFiltered());
+
+  filterBtns.forEach(b=>{
+    b.addEventListener('click', ()=>{
+      filterBtns.forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      renderFiltered();
+    });
+  });
+
+  // init
+  renderFiltered();
+
+  // optional: keyboard "/" focuses search
+  window.addEventListener('keydown', e=>{
+    if(e.key === '/' && document.activeElement !== searchBox){
+      e.preventDefault();
+      searchBox.focus();
+    }
+  });
+})();
+</script>
+
+<!-- load your auth/cart JS afterwards (they should be in static Javascript/ and not use module export) -->
+<script src="{% static 'Javascript/auth.js' %}"></script>
+<script src="{% static 'Javascript/cart.js' %}"></script>
+</body>
+</html>

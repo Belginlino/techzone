@@ -1,0 +1,377 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechZone</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-section">
+                <img src="{% static 'images/laptop.png' %}" alt=""> 
+                <a href="{% url 'home' %}"><h3>TechZone</h3></a>
+
+            </div>
+            
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <span class="search-icon" id="searchIcon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <input type="text" id="searchBox" placeholder="Search products...">
+                </div>
+            </div>
+            
+<div class="nav-menu">
+    <a href="/all/">All Products</a>
+    <a href="/smartphone/">Smartphones</a>
+    <a href="/laptop/">Laptops</a>
+    <a href="/monitor/">Monitors</a>
+    <a href="/cpu/">CPUs</a>
+    <a href="/mouse/">Mouse</a>
+    <a href="/keyboard/">Keyboards</a>
+    <a href="/smartwatch/">Smart Watches</a>
+    <a href="/cart/"><i class="fa-solid fa-cart-shopping"></i></a>
+    <a href="/login/"><i class="fa-solid fa-user"></i></a>
+</div>
+
+
+        </div>
+    </header>
+
+
+    <div class="products-container">
+        <div class="products-row" id="productsGrid">
+            <div class="product-card" data-product="samsung galaxy a56 5g smartphone">
+                <div class="image-container">
+                    <img src="{% static 'images/mobile1.webp' %}" alt="">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">SAMSUNG Galaxy A56 5G</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.8 • <span class="stock">12 in stock</span>
+                    </div>
+                    <div class="price">₹41,999</div>
+                  <button class="add-btn" onclick="addToCart(1)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                                    </div>
+            </div>
+            
+            <div class="product-card" data-product="lenovo monitor full hd">
+                <div class="image-container">
+                    <img src="{% static 'images/monitor1.webp' %}" alt="">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Lenovo (23.8 inch) Full HD Monitor</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.3 • <span class="stock">7 in stock</span>
+                    </div>
+                    <div class="price">₹5,990</div>
+                    <button class="add-btn" onclick="addToCart(2)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+
+                </div>
+            </div>
+            
+            <div class="product-card" data-product="lenovo loq intel core i7 laptop">
+                <div class="image-container">
+                    <img src="{% static 'images/laptop7.webp' %}" alt="">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Lenovo LOQ Intel Core i7 13th Gen</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.3 • <span class="stock">3 in stock</span>
+                    </div>
+                    <div class="price">₹95,190</div>
+                    <button class="add-btn" onclick="addToCart(3)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="product-card" data-product="google pixel 8a smartphone">
+                <div class="image-container">
+                    <img src="{% static 'images/mobile4.webp' %}" alt="">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Google Pixel 8a</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.3 • <span class="stock">18 in stock</span>
+                    </div>
+                    <div class="price">₹37,999</div>
+                    <button class="add-btn" onclick="addToCart(4)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-product="apple iphone 15 black smartphone">
+                <div class="image-container">
+                    <img src="{% static 'images/mobile5.webp' %}" alt="">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Apple iPhone 15 (Black, 128 GB)</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.6 • <span class="stock">10 in stock</span>
+                    </div>
+                    <div class="price">₹64,999</div>
+                    <button class="add-btn" onclick="addToCart(5)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-product="apple iphone 16 pro max smartphone">
+                <div class="image-container">
+                    <img src="{% static 'images/mobile6.webp' %}" alt="">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Apple iPhone 16 Pro Max (256 GB)</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.6 • <span class="stock">4 in stock</span>
+                    </div>
+                    <div class="price">₹1,35,900</div>
+                    <button class="add-btn" onclick="addToCart(6)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+
+                </div>
+            </div>
+
+            <div class="product-card" data-product="samsung galaxy s25 ultra smartphone">
+                <div class="image-container">
+                    <img src="{% static 'images/mobile7.webp' %}" alt="">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">SAMSUNG Galaxy S25 Ultra 5G</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.8 • <span class="stock">8 in stock</span>
+                    </div>
+                    <div class="price">₹1,29,999</div>
+                   <button class="add-btn" onclick="addToCart(7)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-product="vivo x200 pro 5g smartphone">
+                <div class="image-container">
+                    <img src="{% static 'images/mobile8.webp' %}" alt="">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">vivo X200 Pro 5G</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.7 • <span class="stock">10 in stock</span>
+                    </div>
+                    <div class="price">₹94,999</div>
+                    <button class="add-btn" onclick="addToCart(8)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-product="acer aspire 7 laptop">
+                <div class="image-container">
+                    <img src="{% static 'images/laptop1.webp' %}" alt="">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Acer Aspire 7</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.3 • <span class="stock">4 in stock</span>
+                    </div>
+                    <div class="price">₹52,990</div>
+                    <button class="add-btn" onclick="addToCart(9)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-product="hp victus intel core i5 laptop">
+                <div class="image-container">
+                    <img src="{% static 'images/laptop2.webp' %}" alt="">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">HP Victus Intel Core i5 12th Gen</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.7 • <span class="stock">10 in stock</span>
+                    </div>
+                    <div class="price">₹58,990</div>
+                   <button class="add-btn" onclick="addToCart(10)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-product="apple macbook air m2 laptop">
+                <div class="image-container">
+                    <img src="{% static 'images/laptop3.webp' %}" alt="">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Apple MacBook AIR Apple M2</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.7 • <span class="stock">6 in stock</span>
+                    </div>
+                    <div class="price">₹79,990</div>
+                    <button class="add-btn" onclick="addToCart(11)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-product="samsung galaxy book5 pro laptop">
+                <div class="image-container">
+                    <img src="{% static 'images/laptop4.webp' %}" alt="">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">SAMSUNG Galaxy Book5 Pro</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.7 • <span class="stock">2 in stock</span>
+                    </div>
+                    <div class="price">₹1,63,990</div>
+                    <button class="add-btn" onclick="addToCart(12)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-product="lenovo ideapad slim 5 laptop">
+                <div class="image-container">
+                    <img src="{% static 'images/laptop5.webp' %}" alt="">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Lenovo IdeaPad Slim 5</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.2 • <span class="stock">7 in stock</span>
+                    </div>
+                    <div class="price">₹79,190</div>
+                    <button class="add-btn" onclick="addToCart(15)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                       
+                </div>
+            </div>
+
+            <div class="product-card" data-product="asus vivobook 15 laptop">
+                <div class="image-container">
+                    <img src="{% static 'images/laptop6.webp' %}" alt="">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">ASUS Vivobook 15</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.2 • <span class="stock">6 in stock</span>
+                    </div>
+                    <div class="price">₹48,990</div>
+                   <button class="add-btn" onclick="addToCart(16)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                        
+                </div>
+            </div>
+
+            <div class="product-card" data-product="lenovo yoga 7 laptop">
+                <div class="image-container">
+                    <img src="{% static 'images/laptop8.webp' %}" alt="">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Lenovo Yoga 7</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.5 • <span class="stock">3 in stock</span>
+                    </div>
+                    <div class="price">₹1,15,390</div>
+                    <button class="add-btn" onclick="addToCart(17)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="{% static 'images/laptop.png' %}" alt=""> 
+                <a href="{% url 'index' %}"><h3>TechZone</h3></a>
+            </div>
+            
+            <div class="footer-content">
+                <p>The customer is at the heart of our unique business model, which includes design.</p>
+                <div class="social-links">
+                    <a href=""><i class="fa-brands fa-facebook" style="color: #1877f2;"></i></a>
+                    <a href=""><i class="fa-brands fa-instagram" style="color: #e4405f;"></i></a>
+                    <a href=""><i class="fa-brands fa-twitter" style="color: #1da1f2;"></i></a>
+                    <a href=""><i class="fa-brands fa-linkedin-in" style="color: #0077b5;"></i></a>
+                    <a href=""><i class="fa-brands fa-youtube" style="color: #ff0000;"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'Javascript/index.js' %}"></script> <!-- lowercase if folder is lowercase -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    const signInBtn = document.querySelector('.sign-in-btn');
+    
+    if (signInBtn) {
+        signInBtn.addEventListener('click', function() {
+            window.location.href = '/login/';
+        });
+    }
+    
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            const inputs = form.querySelectorAll('input[required]');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.style.borderColor = '#dc3545';
+                    isValid = false;
+                } else {
+                    input.style.borderColor = '#e1e5e9';
+                }
+            });
+            
+            const password1 = document.getElementById('id_password1');
+            const password2 = document.getElementById('id_password2');
+            
+            if (password1 && password2 && password1.value !== password2.value) {
+                password2.style.borderColor = '#dc3545';
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                e.preventDefault();
+            }
+        });
+    }
+    
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        input.addEventListener('input', function() {
+            this.style.borderColor = '#e1e5e9';
+        });
+        
+        input.addEventListener('focus', function() {
+            this.style.borderColor = '#667eea';
+        });
+        
+        input.addEventListener('blur', function() {
+            if (this.value.trim() === '') {
+                this.style.borderColor = '#e1e5e9';
+            }
+        });
+    });
+    
+    const password1 = document.getElementById('id_password1');
+    const password2 = document.getElementById('id_password2');
+    
+    if (password1 && password2) {
+        function validatePasswordMatch() {
+            if (password2.value !== '' && password1.value !== password2.value) {
+                password2.style.borderColor = '#dc3545';
+            } else {
+                password2.style.borderColor = '#e1e5e9';
+            }
+        }
+        
+        password1.addEventListener('input', validatePasswordMatch);
+        password2.addEventListener('input', validatePasswordMatch);
+    }
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // optional: initialize page-specific behavior
+    // update cart count badge with id 'cartCount' if you have it
+    if (typeof updateCartCount === 'function') updateCartCount('cartCount');
+    // render homepage products if you added productsList container
+    if (typeof renderProducts === 'function') renderProducts('productsList');
+});
+</script>
+<script src="{% static 'Javascript/auth.js' %}"></script>
+<script src="{% static 'Javascript/products.js' %}"></script>
+<script src="{% static 'Javascript/cart.js' %}"></script>
+</body>
+</html>

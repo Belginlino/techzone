@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/mouse.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-section">
+                <img src="{% static 'images/laptop.png' %}" alt=""> 
+                <a href="{% url 'index' %}" style="color: black;text-decoration: none;"><h3>TechZone</h3></a>
+            </div>
+            
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <span class="search-icon" id="searchIcon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <input type="text" id="searchBox" placeholder="Search smartwatches...">
+                </div>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="{% url 'All' %}">All Products</a>
+                <a href="{% url 'Smartphone' %}">Smartphones</a>
+                <a href="{% url 'laptop' %}">Laptops</a>
+                <a href="{% url 'monitor' %}">Monitors</a>
+                <a href="{% url 'cpu' %}">CPUs</a>
+                <a href="{% url 'mouse' %}">Mouse</a>
+                <a href="{% url 'keyboard' %}">Keyboards</a>
+                <a href="{% url 'smartwatch' %}">Smart Watches</a>
+                <a href="{% url 'cart' %}"><i class="fa-solid fa-cart-shopping"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="products-container">
+        <div class="firstrow" id="productsGrid">
+            <div class="product-card" data-product="samsung galaxy watch 5 pro">
+                <div class="image-container">
+                    <img src="{% static 'images/mouse1.webp' %}" alt="" style="height: 170px;margin-left: 0px;margin-top: 10px;">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Neon Velocity Gaming Mouse</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.6 • <span class="stock">4 in stock</span>
+                    </div>
+                    <div class="price">₹2,999</div>
+                    <button class="add-btn" onclick="addToCart(22)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="product-card" data-product="apple watch ultra">
+                <div class="image-container">
+                    <img src="{% static 'images/mouse2.webp' %}" alt="" style="height: 170px;margin-left: 0px;margin-top: 10px;">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">CyberNova Gaming Mouse</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.5 • <span class="stock">6 in stock</span>
+                    </div>
+                    <div class="price">₹4,999</div>
+                    <button class="add-btn" onclick="addToCart(23)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="product-card" data-product="amaztim gps smart watch">
+                <div class="image-container">
+                    <img src="{% static 'images/mouse3.webp' %}" alt="" style="height: 170px;margin-left: 0px;margin-top: 10px;">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Chromatic Aura Wireless Mouse</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.0 • <span class="stock">3 in stock</span>
+                    </div>
+                    <div class="price">₹1,999</div>
+                    <button class="add-btn" onclick="addToCart(24)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="product-card" data-product="military smart watch">
+                <div class="image-container">
+                    <img src="{% static 'images/mouse4.webp' %}" alt="" style="height: 170px;margin-left: 0px;margin-top: 10px;">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Luminous Grip Wireless Mouse</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.8 • <span class="stock">6 in stock</span>
+                    </div>
+                    <div class="price">₹1,599</div>
+                    <button class="add-btn" onclick="addToCart(25)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                        <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'Javascript/mouse.js' %}"></script>
+    <script src="{% static 'Javascript/auth.js' %}"></script>
+<script src="{% static 'Javascript/products.js' %}"></script>
+<script src="{% static 'Javascript/cart.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/monitor.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-section">
+                <img src="{% static 'images/laptop.png' %}" alt=""> 
+                <a href="{% url 'index' %}" style="color: black;text-decoration: none;"><h3>TechZone</h3></a>
+            </div>
+            
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <span class="search-icon" id="searchIcon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <input type="text" id="searchBox" placeholder="Search smartwatches...">
+                </div>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="{% url 'All' %}">All Products</a>
+                <a href="{% url 'Smartphone' %}">Smartphones</a>
+                <a href="{% url 'laptop' %}">Laptops</a>
+                <a href="{% url 'monitor' %}">Monitors</a>
+                <a href="{% url 'cpu' %}">CPUs</a>
+                <a href="{% url 'mouse' %}">Mouse</a>
+                <a href="{% url 'keyboard' %}">Keyboards</a>
+                <a href="{% url 'smartwatch' %}">Smart Watches</a>
+                <a href="{% url 'cart' %}"><i class="fa-solid fa-cart-shopping"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="products-container">
+        <div class="firstrow" id="productsGrid">
+            <div class="product-card" data-product="lenovo (23.8 inch) full hd monitor">
+                <div class="image-container">
+                    <img src="{% static 'images/monitor1.webp' %}" alt="" style="height: 170px;margin-left: 0px;margin-top: 10px;">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Lenovo (23.8 inch) Full HD Monitor</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.3 • <span class="stock">7 in stock</span>
+                    </div>
+                    <div class="price">₹5,990</div>
+                    <button class="add-btn" onclick="addToCart(2)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="product-card" data-product="samsung m5 (27 inch) full hd">
+                <div class="image-container">
+                    <img src="{% static 'images/monitor2.webp' %}" alt="" style="height: 170px;margin-left: 0px;margin-top: 10px;">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">SAMSUNG M5 (27 inch) Full HD</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.4 • <span class="stock">6 in stock</span>
+                    </div>
+                    <div class="price">₹14,799</div>
+                    <button class="add-btn" onclick="addToCart(26)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="product-card" data-product="lenovo l-series (27 inch) full hd">
+                <div class="image-container">
+                    <img src="{% static 'images/monitor3.webp' %}" alt="" style="height: 170px;margin-left: 0px;margin-top: 10px;">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Lenovo L-Series (27 inch) Full HD</div>
+                    <div class="rating">
+                        <span class="star">★</span> 4.1 • <span class="stock">3 in stock</span>
+                    </div>
+                    <div class="price">₹11,249</div>
+                    <button class="add-btn" onclick="addToCart(27)"> <i class="fa-solid fa-cart-plus"></i>Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'Javascript/monitor.js' %}"></script>
+    <script src="{% static 'Javascript/auth.js' %}"></script>
+<script src="{% static 'Javascript/products.js' %}"></script>
+<script src="{% static 'Javascript/cart.js' %}"></script>
+</body>
+</html>

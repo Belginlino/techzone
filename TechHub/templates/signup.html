@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sign Up — TechZone</title>
+  <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+</head>
+<body>
+  <h1>Welcome</h1>
+
+  <div class="container">
+    <div class="welcome-section">
+      <img src="{% static 'images/laptop.png' %}" alt="TechZone" style="width:72px; margin-bottom:18px;">
+      <h1>Welcome Back!</h1>
+      <p>To keep connected with us please login with your personal info</p>
+      <a class="sign-in-btn" href="{% url 'login' %}">SIGN IN</a>
+    </div>
+
+    <div class="form-section">
+      <form action="{% url 'signup' %}" method="POST" novalidate>
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="id_username">Username:</label>
+          {{ signup_form.username }}
+        </div>
+
+        <div class="form-group">
+          <label for="id_email">Email:</label>
+          {{ signup_form.email }}
+        </div>
+
+        <div class="form-group">
+          <label for="id_password1">Password:</label>
+          {{ signup_form.password1 }}
+        </div>
+
+        <div class="password-requirements">
+          <ul>
+            <li>Your password can't be too similar to your other personal information.</li>
+            <li>Your password must contain at least 8 characters.</li>
+            <li>Your password can't be a commonly used password.</li>
+            <li>Your password can't be entirely numeric.</li>
+          </ul>
+        </div>
+
+        <div class="form-group">
+          <label for="id_password2">Password confirmation:</label>
+          {{ signup_form.password2 }}
+          <small class="help-text">Enter the same password as before, for verification.</small>
+        </div>
+
+        <button type="submit" class="signup-btn">Sign Up</button>
+
+        {% if signup_form.errors %}
+          <div class="error-messages">
+            {% for field, errors in signup_form.errors.items %}
+              {% for error in errors %}
+                <div class="error">{{ error }}</div>
+              {% endfor %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </form>
+    </div>
+  </div>
+
+  <script src="{% static 'Javascript/auth.js' %}"></script>
+</body>
+</html>

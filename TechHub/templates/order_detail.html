@@ -1,0 +1,42 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Order #{{ order.id }}</title>
+  <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+</head>
+<body>
+  <div class="container">
+    <h1>Order #{{ order.id }}</h1>
+
+    <div class="order-meta">
+      <p><strong>Status:</strong> {{ order.status|default:"-" }}</p>
+      <p><strong>Placed at:</strong> {{ order.created_at|date:"SHORT_DATETIME_FORMAT" }}</p>
+      <p><strong>Total:</strong> ₹{{ order.total_amount|default:order.total|default:"0.00" }}</p>
+      <!-- replace field names above with your actual model fields -->
+    </div>
+
+    <h2>Items</h2>
+    <div class="items-list">
+      {% if order.orderitem_set.all %}
+        {% for it in order.orderitem_set.all %}
+          <div class="order-item">
+           
+            <div>
+              <div><strong>{{ it.product.name }}</strong></div>
+              <div>Quantity: {{ it.quantity }}</div>
+              <div>Price: ₹{{ it.price }}</div>
+              <div>Subtotal: ₹{{ it.quantity|floatformat:2|add:"0" }}</div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>No items found for this order.</p>
+      {% endif %}
+    </div>
+
+    <p><a href="/">← Back to shop</a></p>
+  </div>
+</body>
+</html>
