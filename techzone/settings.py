@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-)hg4a)zcmk)(h01$!flzho$^v)14rp)703b+9b!x*_4_(7(-g6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*','https://techzone-jljx.onrender.com']
 
 
 # Application definition
@@ -47,8 +47,10 @@ INSTALLED_APPS = [
 ]
 
 
-MIDDLEWARE = [    'corsheaders.middleware.CorsMiddleware', 
+MIDDLEWARE = [    
+    'corsheaders.middleware.CorsMiddleware', 
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -124,14 +126,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 # This is the URL used when referencing static files in templates.
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # This is a list of directories where Django will look for static files
 # in addition to the static/ directory of each app.
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
-
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # This is the directory where `python manage.py collectstatic` will
 # collect all static files for deployment.
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
